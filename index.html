@@ -5,149 +5,506 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MMSF1 Enemy Finder</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at top, #1a202c 0%, #0b0e14 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0d1b2a 100%);
             color: #e0e6ed;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
         }
+
         .container {
             width: 100%;
-            max-width: 650px;
-            background: rgba(26, 31, 41, 0.8);
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            border: 1px solid rgba(79, 209, 197, 0.1);
-            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin: 0 auto;
         }
-        h1 {
+
+        header {
             text-align: center;
-            color: #4fd1c5;
-            margin-top: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            animation: slideDown 0.6s ease-out;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #4fd1c5 0%, #56e8d3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+            animation: slideUp 0.6s ease-out 0.1s both;
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .search-box {
-            width: 100%;
-            padding: 14px 20px;
-            border-radius: 8px;
-            border: 2px solid #2d3748;
-            background: #0b0e14;
+            flex: 1;
+            padding: 16px 20px;
+            padding-left: 45px;
+            border-radius: 12px;
+            border: 2px solid rgba(79, 209, 197, 0.3);
+            background: rgba(15, 23, 42, 0.9);
             color: white;
             font-size: 1.1rem;
-            box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
+
         .search-box:focus {
             border-color: #4fd1c5;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 0 20px rgba(79, 209, 197, 0.3);
         }
+
+        .search-box::placeholder {
+            color: #64748b;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            font-size: 1.2rem;
+            color: #4fd1c5;
+            pointer-events: none;
+        }
+
+        .clear-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 2px solid rgba(79, 209, 197, 0.3);
+            background: rgba(79, 209, 197, 0.1);
+            color: #4fd1c5;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: none;
+        }
+
+        .clear-btn:hover {
+            background: rgba(79, 209, 197, 0.2);
+            border-color: #4fd1c5;
+        }
+
+        .clear-btn.active {
+            display: block;
+        }
+
+        .search-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 1rem;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            border: 1px solid rgba(79, 209, 197, 0.1);
+        }
+
+        .result-count {
+            color: #4fd1c5;
+            font-weight: 600;
+        }
+
         #results {
-            margin-top: 20px;
+            animation: fadeIn 0.4s ease;
         }
+
+        .enemy-group {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(20, 30, 48, 0.8) 100%);
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(79, 209, 197, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .enemy-group:hover {
+            border-color: rgba(79, 209, 197, 0.5);
+            box-shadow: 0 8px 32px rgba(79, 209, 197, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .enemy-title {
+            color: #56e8d3;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .location-count {
+            color: #4fd1c5;
+            font-size: 0.85rem;
+            background: rgba(79, 209, 197, 0.15);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
         .location-list {
             list-style: none;
-            padding: 0;
-            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
         }
+
         .location-item {
-            background: rgba(45, 55, 72, 0.6);
-            margin: 8px 0;
-            padding: 12px 18px;
-            border-radius: 6px;
-            border-left: 4px solid #4fd1c5;
-            transition: transform 0.1s;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 3px solid #4fd1c5;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            cursor: default;
         }
+
         .location-item:hover {
-            background: rgba(45, 55, 72, 0.9);
+            background: rgba(79, 209, 197, 0.1);
+            border-left-color: #56e8d3;
             transform: translateX(4px);
         }
-        .enemy-group {
-            margin-bottom: 25px;
-            border-bottom: 1px solid #2d3748;
-            padding-bottom: 15px;
-        }
-        .enemy-title {
-            color: #4fd1c5;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
+
         .no-results {
-            color: #a0aec0;
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #94a3b8;
             font-style: italic;
+        }
+
+        .error-message {
+            color: #feb2b2;
+            background: rgba(127, 29, 29, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #f87171;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .error-message strong {
+            display: block;
+            margin-bottom: 12px;
+            color: #fca5a5;
+        }
+
+        .error-message code {
+            display: block;
+            background: #0f172a;
+            color: #7ee8bf;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .suggestions.active {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(79, 209, 197, 0.1);
+        }
+
+        .suggestion-item:hover {
+            background: rgba(79, 209, 197, 0.1);
+            color: #56e8d3;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(79, 209, 197, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 209, 197, 0.4);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(79, 209, 197, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .location-list {
+                grid-template-columns: 1fr;
+            }
+
+            .search-stats {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Enemy Finder</h1>
-    <input type="text" id="enemyInput" class="search-box" list="enemyList" placeholder="Enter enemy name (e.g. OctoNinja)...">
-    <datalist id="enemyList"></datalist>
+    <header>
+        <h1>⚔️ Enemy Finder</h1>
+        <p class="subtitle">MEGA MAN STAR FORCE 1 - Find All Enemy Locations</p>
+    </header>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <div style="position: relative; flex: 1;">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="enemyInput" class="search-box" placeholder="Search enemy name (e.g., OctoNinja, Peekaboo)...">
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+            <button class="clear-btn" id="clearBtn" title="Clear search">✕ Clear</button>
+        </div>
+    </div>
+
+    <div class="search-stats" id="stats" style="display: none;">
+        <span>Found <span class="result-count" id="resultCount">0</span> enemy types</span>
+        <span id="locationStats"></span>
+    </div>
 
     <div id="results">
-        <p class="no-results">Start typing to find locations...</p>
+        <p class="no-results">🔎 Type an enemy name to search...</p>
     </div>
 </div>
 
 <script>
     let enemyData = {};
+    let allEnemies = [];
 
-    // Load the JSON data. Note: Requires a local server to bypass CORS restrictions.
+    // Load the JSON data
     fetch('enemy_locations.json')
         .then(response => response.json())
         .then(data => {
-            enemyData = data;
-            const datalist = document.getElementById('enemyList');
-            const uniqueEnemies = Object.keys(data).filter(name => isNaN(name));
-            uniqueEnemies.sort().forEach(name => {
-                const option = document.createElement('option');
-                option.value = name;
-                datalist.appendChild(option);
+            // Filter out non-enemy entries
+            const filtered = {};
+            const metaKeywords = ['HP', '%', 'Chance', 'Harp Note', 'appear', 'order'];
+            
+            Object.keys(data).forEach(key => {
+                const isMeta = metaKeywords.some(keyword => key.includes(keyword));
+                const isNumericOnly = /^[\d.%\s]+$/.test(key);
+                
+                if (!isMeta && !isNumericOnly) {
+                    filtered[key] = data[key];
+                }
             });
+            
+            // Normalize data
+            const merged = {};
+            Object.keys(filtered).forEach(key => {
+                const lowerKey = key.toLowerCase();
+                const existingKey = Object.keys(merged).find(k => k.toLowerCase() === lowerKey);
+                
+                if (existingKey) {
+                    merged[existingKey] = [...new Set([...merged[existingKey], ...filtered[key]])].sort();
+                } else {
+                    merged[key] = filtered[key].sort();
+                }
+            });
+            
+            enemyData = merged;
+            allEnemies = Object.keys(enemyData).sort();
         })
         .catch(err => {
             console.error('Failed to load enemy data:', err);
             document.getElementById('results').innerHTML = `
-                <div class="no-results" style="color: #feb2b2; background: #2d3748; padding: 20px; border-radius: 8px; border: 1px solid #f56565; text-align: left;">
-                    <strong>CORS Error:</strong> Browsers block data fetching when opening files via <code>file://</code>.<br><br>
+                <div class="error-message">
+                    <strong>⚠️ CORS Error - Cannot load enemy data</strong>
+                    Browsers block data fetching when opening files via file:// protocol.<br><br>
                     <strong>To Fix:</strong> Run a local server in this folder:<br>
-                    <code style="display: block; background: #000; color: #fff; padding: 10px; margin-top: 10px; font-family: monospace;">python -m http.server</code>
-                    <br>Then visit <a href="http://localhost:8000" style="color: #4fd1c5;">http://localhost:8000</a> in your browser.
+                    <code>python -m http.server 8000</code>
+                    <br>Then visit <a href="http://localhost:8000" style="color: #4fd1c5;">http://localhost:8000</a>
                 </div>`;
         });
 
-    document.getElementById('enemyInput').addEventListener('input', (e) => {
-        const val = e.target.value.trim();
-        const resultsDiv = document.getElementById('results');
-        
+    const searchInput = document.getElementById('enemyInput');
+    const resultsDiv = document.getElementById('results');
+    const statsDiv = document.getElementById('stats');
+    const clearBtn = document.getElementById('clearBtn');
+    const suggestionsDiv = document.getElementById('suggestions');
+
+    // Clear button handler
+    clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        clearBtn.classList.remove('active');
+        suggestionsDiv.classList.remove('active');
+        resultsDiv.innerHTML = '<p class="no-results">🔎 Type an enemy name to search...</p>';
+        statsDiv.style.display = 'none';
+    });
+
+    // Search handler with debouncing
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const val = e.target.value.trim().toLowerCase();
+
+        // Show/hide clear button
+        clearBtn.classList.toggle('active', val.length > 0);
+
         if (val === "") {
-            resultsDiv.innerHTML = '<p class="no-results">Start typing to find locations...</p>';
+            resultsDiv.innerHTML = '<p class="no-results">🔎 Type an enemy name to search...</p>';
+            statsDiv.style.display = 'none';
+            suggestionsDiv.classList.remove('active');
             return;
         }
 
-        // Find all keys that contain the search term
-        const matches = Object.keys(enemyData).filter(key => 
-            key.toLowerCase().includes(val)
+        searchTimeout = setTimeout(() => {
+            performSearch(val);
+        }, 100);
+    });
+
+    function performSearch(val) {
+        // Find matches
+        const exactMatches = Object.keys(enemyData).filter(key => 
+            key.toLowerCase() === val
         );
+        const partialMatches = Object.keys(enemyData).filter(key => 
+            key.toLowerCase().includes(val) && key.toLowerCase() !== val
+        ).sort();
         
-        if (matches.length > 0) {
-            resultsDiv.innerHTML = matches.map(name => `
-                <div class="enemy-group">
-                    <div class="enemy-title">${name}</div>
-                    <ul class="location-list">
-                        ${enemyData[name].map(loc => `<li class="location-item">${loc}</li>`).join('')}
-                    </ul>
-                </div>
-            `).join('');
+        const matches = [...exactMatches, ...partialMatches];
+
+        // Show suggestions
+        const suggestions = allEnemies
+            .filter(e => e.toLowerCase().includes(val))
+            .slice(0, 8);
+        
+        if (suggestions.length > 0 && val.length > 0) {
+            suggestionsDiv.innerHTML = suggestions.map(s => 
+                `<div class="suggestion-item" onclick="document.getElementById('enemyInput').value='${s}'; performSearch('${s.toLowerCase()}'); suggestionsDiv.classList.remove('active');">${s}</div>`
+            ).join('');
+            suggestionsDiv.classList.add('active');
         } else {
-            resultsDiv.innerHTML = `<p class="no-results">No enemies found matching "${e.target.value}"</p>`;
+            suggestionsDiv.classList.remove('active');
+        }
+
+        // Display results
+        if (matches.length > 0) {
+            const totalLocations = matches.reduce((sum, name) => sum + enemyData[name].length, 0);
+            
+            resultsDiv.innerHTML = matches.map(name => {
+                const locations = enemyData[name].sort();
+                return `
+                    <div class="enemy-group">
+                        <div class="enemy-title">
+                            ${name}
+                            <span class="location-count">${locations.length} locations</span>
+                        </div>
+                        <ul class="location-list">
+                            ${locations.map(loc => `<li class="location-item">${loc}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }).join('');
+
+            statsDiv.style.display = 'flex';
+            document.getElementById('resultCount').textContent = matches.length;
+            document.getElementById('locationStats').textContent = `Across ${totalLocations} total locations`;
+        } else {
+            resultsDiv.innerHTML = `<p class="no-results">😔 No enemies found matching "${val}"<br><small>Try searching for a different enemy name</small></p>`;
+            statsDiv.style.display = 'none';
+        }
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchInput.value) {
+            clearBtn.click();
         }
     });
 </script>
