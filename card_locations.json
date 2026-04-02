@@ -1,0 +1,263 @@
+{
+  "PlusCannon": [
+    "Help Quest"
+  ],
+  "PlasmaGun2": [
+    "Help Quest"
+  ],
+  "HeatBall2": [
+    "Help Quest"
+  ],
+  "HeatBall3": [
+    "Help Quest"
+  ],
+  "IceMeteor1": [
+    "Help Quest"
+  ],
+  "IceMeteor2": [
+    "Help Quest"
+  ],
+  "GrndWave1": [
+    "Mettenna"
+  ],
+  "GrndWave2": [
+    "Help Quest"
+  ],
+  "JetAttack1": [
+    "Crowcar"
+  ],
+  "JetAttack2": [
+    "Crowket"
+  ],
+  "JetAttack3": [
+    "Crowbus"
+  ],
+  "PowerBomb1": [
+    "CannonBase"
+  ],
+  "PowerBomb2": [
+    "MegaBase"
+  ],
+  "PowerBomb3": [
+    "GigaBase"
+  ],
+  "GhstPulse1": [
+    "Peekaboo"
+  ],
+  "GhstPulse2": [
+    "Wavyboo"
+  ],
+  "FireRing1": [
+    "HotRoader"
+  ],
+  "FireRing2": [
+    "HotMotor"
+  ],
+  "TimeBomb1": [
+    "DoomCount"
+  ],
+  "TimeBomb2": [
+    "DoomBomber"
+  ],
+  "FireBzook1": [
+    "Rocky"
+  ],
+  "FireBzook2": [
+    "Help Quest"
+  ],
+  "TailBurnr1": [
+    "Melamander"
+  ],
+  "TailBurnr2": [
+    "Melalizard"
+  ],
+  "WideWave1": [
+    "Wibbledee"
+  ],
+  "WideWave2": [
+    "Wibbledoo"
+  ],
+  "WideWave3": [
+    "Wibbledum"
+  ],
+  "ChainBubl1": [
+    "StreamCancro"
+  ],
+  "ChainBubl2": [
+    "RiverCancro"
+  ],
+  "GreenInk": [
+    "OctoNinja"
+  ],
+  "BlueInk": [
+    "OctoIcer"
+  ],
+  "PurpleInk": [
+    "OctoPoison"
+  ],
+  "StikyRain1": [
+    "Gooey"
+  ],
+  "StikyRain2": [
+    "Goopy"
+  ],
+  "CloudShot1": [
+    "BoomBolt"
+  ],
+  "CloudShot2": [
+    "BoomSpark"
+  ],
+  "ThndrBall1": [
+    "ZapAce"
+  ],
+  "ThndrBall2": [
+    "ZapKing"
+  ],
+  "ThndrBall3": [
+    "ZapJoker"
+  ],
+  "VolticEye1": [
+    "Eyez"
+  ],
+  "VolticEye2": [
+    "GuardEyez"
+  ],
+  "FlickrKck1": [
+    "Lampis"
+  ],
+  "FlickrKck2": [
+    "Lucis"
+  ],
+  "JumboHmmr1": [
+    "RhinoHorn"
+  ],
+  "JumboHmmr2": [
+    "RhinoHammer"
+  ],
+  "MopLance1": [
+    "PrivateMop"
+  ],
+  "MopLance2": [
+    "ColonelMop"
+  ],
+  "MopLance3": [
+    "GeneralMop"
+  ],
+  "Fokx-Fu1": [
+    "Fokx"
+  ],
+  "Fokx-Fu2": [
+    "CopyFokx"
+  ],
+  "Fokx-Fu3": [
+    "GuiseFokx"
+  ],
+  "VulcnSeed1": [
+    "TropiConga"
+  ],
+  "VulcnSeed2": [
+    "TropiCoppa"
+  ],
+  "VulcnSeed3": [
+    "TropiCoola"
+  ],
+  "BraveSwrd1": [
+    "MonoSword"
+  ],
+  "BraveSwrd2": [
+    "MonoSwordin"
+  ],
+  "BraveSwrd3": [
+    "MonoSwordil"
+  ],
+  "JunkCube1": [
+    "Junk-O"
+  ],
+  "JunkCube2": [
+    "Junk-O2"
+  ],
+  "JunkCube3": [
+    "Junk-O3"
+  ],
+  "SyncHook1": [
+    "BellGong"
+  ],
+  "SyncHook2": [
+    "BellRef"
+  ],
+  "PowerSong": [
+    "LuPavarot",
+    "LuPelvis",
+    "LupBach"
+  ],
+  "QuakeSong": [
+    "LuPavarot",
+    "LupiNatra",
+    "LupBach"
+  ],
+  "TripSong": [
+    "Help Quest",
+    "LuPavarot",
+    "LupBach"
+  ],
+  "MoaiFall1": [
+    "Moaian"
+  ],
+  "MoaiFall2": [
+    "Stonehead"
+  ],
+  "BigAx1": [
+    "GreatAx"
+  ],
+  "BigAx2": [
+    "MagnaAx"
+  ],
+  "BigAx3": [
+    "KaiserAx"
+  ],
+  "MagiCrysl1": [
+    "Magera"
+  ],
+  "MagiCrysl2": [
+    "Mageri"
+  ],
+  "MagiCrysl3": [
+    "Magero"
+  ],
+  "BlackHole1": [
+    "Grabity"
+  ],
+  "BlackHole2": [
+    "Grabotron"
+  ],
+  "BlackHole3": [
+    "Grabaklone"
+  ],
+  "BrsrkSwrd1": [
+    "McCleaver"
+  ],
+  "BrsrkSwrd2": [
+    "McDicer"
+  ],
+  "BrsrkSwrd3": [
+    "McLopper"
+  ],
+  "GreenBurst": [
+    "Help Quest"
+  ],
+  "Whistle": [
+    "Help Quest"
+  ],
+  "Recover120": [
+    "Help Quest"
+  ],
+  "Invisible": [
+    "Help Quest"
+  ],
+  "GNullStage": [
+    "Help Quest"
+  ],
+  "Attack+10": [
+    "Help Quest"
+  ]
+}

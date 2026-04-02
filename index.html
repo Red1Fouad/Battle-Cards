@@ -204,6 +204,48 @@
             transform: translateX(4px);
         }
 
+        .card-section {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 2px solid rgba(79, 209, 197, 0.2);
+        }
+
+        .card-section-title {
+            color: #f472b6;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+        }
+
+        .card-item {
+            background: rgba(244, 114, 182, 0.1);
+            padding: 8px 10px;
+            border-radius: 6px;
+            border-left: 3px solid #f472b6;
+            font-size: 0.85rem;
+            color: #f1a2d2;
+            transition: all 0.2s ease;
+            cursor: default;
+            text-align: center;
+        }
+
+        .card-item:hover {
+            background: rgba(244, 114, 182, 0.15);
+            transform: translateY(-2px);
+        }
+
         .no-results {
             text-align: center;
             padding: 3rem 2rem;
@@ -386,58 +428,86 @@
 
 <script>
     let enemyData = {};
+    let cardData = {};
     let allEnemies = [];
 
-    // Load the JSON data
-    fetch('enemy_locations.json')
-        .then(response => response.json())
-        .then(data => {
-            // Filter out non-enemy entries
-            const filtered = {};
-            const metaKeywords = ['HP', '%', 'Chance', 'Harp Note', 'appear', 'order'];
+    // Load both JSON files
+    Promise.all([
+        fetch('enemy_locations.json').then(r => r.json()),
+        fetch('card_locations.json').then(r => r.json())
+    ])
+    .then(([enemies, cards]) => {
+        // Filter out non-enemy entries
+        const filtered = {};
+        const metaKeywords = ['HP', '%', 'Chance', 'Harp Note', 'appear', 'order'];
+        
+        Object.keys(enemies).forEach(key => {
+            const isMeta = metaKeywords.some(keyword => key.includes(keyword));
+            const isNumericOnly = /^[\d.%\s]+$/.test(key);
             
-            Object.keys(data).forEach(key => {
-                const isMeta = metaKeywords.some(keyword => key.includes(keyword));
-                const isNumericOnly = /^[\d.%\s]+$/.test(key);
-                
-                if (!isMeta && !isNumericOnly) {
-                    filtered[key] = data[key];
-                }
-            });
-            
-            // Normalize data
-            const merged = {};
-            Object.keys(filtered).forEach(key => {
-                const lowerKey = key.toLowerCase();
-                const existingKey = Object.keys(merged).find(k => k.toLowerCase() === lowerKey);
-                
-                if (existingKey) {
-                    merged[existingKey] = [...new Set([...merged[existingKey], ...filtered[key]])].sort();
-                } else {
-                    merged[key] = filtered[key].sort();
-                }
-            });
-            
-            enemyData = merged;
-            allEnemies = Object.keys(enemyData).sort();
-        })
-        .catch(err => {
-            console.error('Failed to load enemy data:', err);
-            document.getElementById('results').innerHTML = `
-                <div class="error-message">
-                    <strong>⚠️ CORS Error - Cannot load enemy data</strong>
-                    Browsers block data fetching when opening files via file:// protocol.<br><br>
-                    <strong>To Fix:</strong> Run a local server in this folder:<br>
-                    <code>python -m http.server 8000</code>
-                    <br>Then visit <a href="http://localhost:8000" style="color: #4fd1c5;">http://localhost:8000</a>
-                </div>`;
+            if (!isMeta && !isNumericOnly) {
+                filtered[key] = enemies[key];
+            }
         });
+        
+        // Normalize data
+        const merged = {};
+        Object.keys(filtered).forEach(key => {
+            const lowerKey = key.toLowerCase();
+            const existingKey = Object.keys(merged).find(k => k.toLowerCase() === lowerKey);
+            
+            if (existingKey) {
+                merged[existingKey] = [...new Set([...merged[existingKey], ...filtered[key]])].sort();
+            } else {
+                merged[key] = filtered[key].sort();
+            }
+        });
+        
+        enemyData = merged;
+        cardData = cards;
+        allEnemies = Object.keys(enemyData).sort();
+    })
+    .catch(err => {
+        console.error('Failed to load data:', err);
+        document.getElementById('results').innerHTML = `
+            <div class="error-message">
+                <strong>⚠️ Error - Cannot load data</strong>
+                Browsers block data fetching when opening files via file:// protocol.<br><br>
+                <strong>To Fix:</strong> Run a local server in this folder:<br>
+                <code>python -m http.server 8000</code>
+                <br>Then visit <a href="http://localhost:8000" style="color: #4fd1c5;">http://localhost:8000</a>
+            </div>`;
+    });
 
     const searchInput = document.getElementById('enemyInput');
     const resultsDiv = document.getElementById('results');
     const statsDiv = document.getElementById('stats');
     const clearBtn = document.getElementById('clearBtn');
     const suggestionsDiv = document.getElementById('suggestions');
+
+    // Get cards dropped by an enemy
+    function getCardsForEnemy(enemyName) {
+        const cards = [];
+        for (const [cardName, sources] of Object.entries(cardData)) {
+            if (sources.includes(enemyName)) {
+                cards.push(cardName);
+            }
+        }
+        return cards.sort();
+    }
+
+    // Get enemies that drop a specific card
+    function getEnemiesForCard(cardName) {
+        const sources = cardData[cardName];
+        if (!sources) return [];
+        // Filter out "Help Quest" and return only enemy names
+        return sources.filter(source => source !== "Help Quest");
+    }
+
+    // Get all card names (for suggestions and search)
+    function getAllCards() {
+        return Object.keys(cardData).sort();
+    }
 
     // Clear button handler
     clearBtn.addEventListener('click', () => {
@@ -471,23 +541,36 @@
     });
 
     function performSearch(val) {
-        // Find matches
-        const exactMatches = Object.keys(enemyData).filter(key => 
+        // Check for enemy matches
+        const exactEnemyMatches = Object.keys(enemyData).filter(key => 
             key.toLowerCase() === val
         );
-        const partialMatches = Object.keys(enemyData).filter(key => 
+        const partialEnemyMatches = Object.keys(enemyData).filter(key => 
             key.toLowerCase().includes(val) && key.toLowerCase() !== val
         ).sort();
         
-        const matches = [...exactMatches, ...partialMatches];
+        const enemyMatches = [...exactEnemyMatches, ...partialEnemyMatches];
 
-        // Show suggestions
-        const suggestions = allEnemies
-            .filter(e => e.toLowerCase().includes(val))
-            .slice(0, 8);
+        // Check for card matches
+        const allCards = getAllCards();
+        const exactCardMatches = allCards.filter(card => 
+            card.toLowerCase() === val
+        );
+        const partialCardMatches = allCards.filter(card => 
+            card.toLowerCase().includes(val) && card.toLowerCase() !== val
+        ).sort();
         
-        if (suggestions.length > 0 && val.length > 0) {
-            suggestionsDiv.innerHTML = suggestions.map(s => 
+        const cardMatches = [...exactCardMatches, ...partialCardMatches];
+
+        // Show suggestions (both enemies and cards)
+        const allSuggestions = [
+            ...allEnemies.filter(e => e.toLowerCase().includes(val)),
+            ...allCards.filter(c => c.toLowerCase().includes(val))
+        ];
+        const uniqueSuggestions = [...new Set(allSuggestions)].sort().slice(0, 8);
+        
+        if (uniqueSuggestions.length > 0 && val.length > 0) {
+            suggestionsDiv.innerHTML = uniqueSuggestions.map(s => 
                 `<div class="suggestion-item" onclick="document.getElementById('enemyInput').value='${s}'; performSearch('${s.toLowerCase()}'); suggestionsDiv.classList.remove('active');">${s}</div>`
             ).join('');
             suggestionsDiv.classList.add('active');
@@ -496,11 +579,30 @@
         }
 
         // Display results
-        if (matches.length > 0) {
-            const totalLocations = matches.reduce((sum, name) => sum + enemyData[name].length, 0);
-            
-            resultsDiv.innerHTML = matches.map(name => {
+        let resultsHtml = '';
+        let totalLocations = 0;
+        let resultCount = 0;
+
+        // Show enemy results
+        if (enemyMatches.length > 0) {
+            resultsHtml += enemyMatches.map(name => {
                 const locations = enemyData[name].sort();
+                const cards = getCardsForEnemy(name);
+                totalLocations += locations.length;
+                resultCount++;
+                
+                let cardHtml = '';
+                if (cards.length > 0) {
+                    cardHtml = `
+                        <div class="card-section">
+                            <div class="card-section-title">💳 Drops ${cards.length} card${cards.length !== 1 ? 's' : ''}</div>
+                            <ul class="card-list">
+                                ${cards.map(card => `<li class="card-item">${card}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+                
                 return `
                     <div class="enemy-group">
                         <div class="enemy-title">
@@ -510,15 +612,77 @@
                         <ul class="location-list">
                             ${locations.map(loc => `<li class="location-item">${loc}</li>`).join('')}
                         </ul>
+                        ${cardHtml}
                     </div>
                 `;
             }).join('');
+        }
 
+        // Show card results (enemies that drop the card)
+        if (cardMatches.length > 0) {
+            resultsHtml += cardMatches.map(cardName => {
+                const enemies = getEnemiesForCard(cardName);
+                
+                if (enemies.length === 0) {
+                    return `
+                        <div class="enemy-group" style="border-color: rgba(244, 114, 182, 0.3); border-left: 4px solid #f472b6;">
+                            <div class="enemy-title" style="color: #f472b6;">
+                                💳 ${cardName}
+                                <span class="location-count" style="background: rgba(244, 114, 182, 0.15); color: #f472b6;">No enemy sources</span>
+                            </div>
+                            <p style="color: #94a3b8; font-style: italic; margin-top: 8px;">Only available from Help Quest</p>
+                        </div>
+                    `;
+                }
+
+                const enemyResults = enemies.map(enemyName => {
+                    const locations = enemyData[enemyName] || [];
+                    totalLocations += locations.length;
+                    resultCount++;
+                    
+                    const cards = getCardsForEnemy(enemyName);
+                    let cardHtml = '';
+                    if (cards.length > 0) {
+                        cardHtml = `
+                            <div class="card-section">
+                                <div class="card-section-title">💳 Also drops ${cards.length} card${cards.length !== 1 ? 's' : ''}</div>
+                                <ul class="card-list">
+                                    ${cards.map(card => `<li class="card-item">${card}${card === cardName ? ' ✓' : ''}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    return `
+                        <div class="enemy-group">
+                            <div class="enemy-title">
+                                ${enemyName}
+                                <span class="location-count">${locations.length} locations</span>
+                            </div>
+                            <ul class="location-list">
+                                ${locations.map(loc => `<li class="location-item">${loc}</li>`).join('')}
+                            </ul>
+                            ${cardHtml}
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div style="background: rgba(244, 114, 182, 0.05); border: 2px solid rgba(244, 114, 182, 0.2); border-radius: 12px; padding: 16px; margin-bottom: 1.5rem;">
+                        <h2 style="color: #f472b6; font-size: 1.3rem; margin-bottom: 16px;">💳 Card: ${cardName}</h2>
+                        ${enemyResults}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        if (resultsHtml) {
+            resultsDiv.innerHTML = resultsHtml;
             statsDiv.style.display = 'flex';
-            document.getElementById('resultCount').textContent = matches.length;
+            document.getElementById('resultCount').textContent = resultCount;
             document.getElementById('locationStats').textContent = `Across ${totalLocations} total locations`;
         } else {
-            resultsDiv.innerHTML = `<p class="no-results">😔 No enemies found matching "${val}"<br><small>Try searching for a different enemy name</small></p>`;
+            resultsDiv.innerHTML = `<p class="no-results">😔 No enemies or cards found matching "${val}"<br><small>Try searching for a different enemy or card name</small></p>`;
             statsDiv.style.display = 'none';
         }
     }
