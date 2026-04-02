@@ -22,7 +22,7 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -54,24 +54,29 @@
             position: relative;
             margin-bottom: 2rem;
             animation: slideUp 0.6s ease-out 0.1s both;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         .search-wrapper {
             position: relative;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            width: 100%;
+            max-width: 900px;
         }
 
         .search-box {
             flex: 1;
-            padding: 16px 20px;
-            padding-left: 45px;
-            border-radius: 12px;
+            padding: 18px 24px;
+            padding-left: 50px;
+            border-radius: 14px;
             border: 2px solid rgba(79, 209, 197, 0.3);
             background: rgba(15, 23, 42, 0.9);
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             outline: none;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
@@ -89,22 +94,24 @@
 
         .search-icon {
             position: absolute;
-            left: 14px;
-            font-size: 1.2rem;
+            left: 16px;
+            font-size: 1.3rem;
             color: #4fd1c5;
             pointer-events: none;
         }
 
         .clear-btn {
-            padding: 10px 16px;
-            border-radius: 8px;
+            padding: 12px 18px;
+            border-radius: 10px;
             border: 2px solid rgba(79, 209, 197, 0.3);
             background: rgba(79, 209, 197, 0.1);
             color: #4fd1c5;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
             transition: all 0.2s ease;
             display: none;
+            white-space: nowrap;
         }
 
         .clear-btn:hover {
@@ -321,6 +328,21 @@
                 font-size: 2rem;
             }
 
+            .search-wrapper {
+                max-width: 100%;
+            }
+
+            .search-box {
+                padding: 14px 20px;
+                padding-left: 42px;
+                font-size: 1rem;
+            }
+
+            .clear-btn {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+
             .location-list {
                 grid-template-columns: 1fr;
             }
@@ -345,7 +367,7 @@
         <div class="search-wrapper">
             <div style="position: relative; flex: 1;">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="enemyInput" class="search-box" placeholder="Search enemy name (e.g., OctoNinja, Peekaboo)...">
+                <input type="text" id="enemyInput" class="search-box" placeholder="Search enemy name...">
                 <div class="suggestions" id="suggestions"></div>
             </div>
             <button class="clear-btn" id="clearBtn" title="Clear search">✕ Clear</button>
