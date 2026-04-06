@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMSF1 Enemy Finder</title>
+    <title>Mega Man Star Force Enemy Finder</title>
     <style>
         * {
             margin: 0;
@@ -24,6 +24,41 @@
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 1.75rem;
+        }
+
+        .tab-btn {
+            border: 2px solid rgba(79, 209, 197, 0.25);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.75);
+            color: #cbd5e1;
+            padding: 12px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .tab-btn:hover {
+            border-color: rgba(79, 209, 197, 0.5);
+            background: rgba(15, 23, 42, 0.9);
+            color: #ffffff;
+        }
+
+        .tab-btn.active {
+            border-color: #4fd1c5;
+            background: linear-gradient(135deg, #4fd1c5 0%, #56e8d3 100%);
+            color: #0f172a;
+            box-shadow: 0 12px 24px rgba(79, 209, 197, 0.18);
         }
 
         header {
@@ -61,10 +96,13 @@
 
         .search-wrapper {
             position: relative;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 12px;
-            width: 100%;
+            max-width: 760px;
+            width: auto;
+            margin: 0 auto;
+            justify-content: center;
         }
 
         .search-box {
@@ -401,8 +439,14 @@
 <div class="container">
     <header>
         <h1>⚔️ Enemy Finder</h1>
-        <p class="subtitle">MEGA MAN STAR FORCE 1 - Find All Enemy Locations</p>
+        <p class="subtitle" id="pageSubtitle">MEGA MAN STAR FORCE 1 - Find All Enemy Locations</p>
     </header>
+
+    <div class="tabs-container" id="gameTabs">
+        <button class="tab-btn active" data-version="SF1">Star Force 1</button>
+        <button class="tab-btn" data-version="SF2">Star Force 2</button>
+        <button class="tab-btn" data-version="SF3">Star Force 3</button>
+    </div>
 
     <div class="search-container">
         <div class="search-wrapper">
@@ -430,59 +474,92 @@
     let cardData = {};
     let allEnemies = [];
 
-    // Load both JSON files
-    Promise.all([
-        fetch('enemy_locations.json').then(r => r.json()),
-        fetch('card_locations.json').then(r => r.json())
-    ])
-    .then(([enemies, cards]) => {
-        // Filter out non-enemy entries
-        const filtered = {};
-        const metaKeywords = ['HP', '%', 'Chance', 'Harp Note', 'appear', 'order'];
-        
-        Object.keys(enemies).forEach(key => {
-            const isMeta = metaKeywords.some(keyword => key.includes(keyword));
-            const isNumericOnly = /^[\d.%\s]+$/.test(key);
-            
-            if (!isMeta && !isNumericOnly) {
-                filtered[key] = enemies[key];
-            }
-        });
-        
-        // Normalize data
-        const merged = {};
-        Object.keys(filtered).forEach(key => {
-            const lowerKey = key.toLowerCase();
-            const existingKey = Object.keys(merged).find(k => k.toLowerCase() === lowerKey);
-            
-            if (existingKey) {
-                merged[existingKey] = [...new Set([...merged[existingKey], ...filtered[key]])].sort();
-            } else {
-                merged[key] = filtered[key].sort();
-            }
-        });
-        
-        enemyData = merged;
-        cardData = cards;
-        allEnemies = Object.keys(enemyData).sort();
-    })
-    .catch(err => {
-        console.error('Failed to load data:', err);
-        document.getElementById('results').innerHTML = `
-            <div class="error-message">
-                <strong>⚠️ Error - Cannot load data</strong>
-                Browsers block data fetching when opening files via file:// protocol.<br><br>
-                <strong>To Fix:</strong> Run a local server in this folder:<br>
-                <code>python -m http.server 8000</code>
-                <br>Then visit <a href="http://localhost:8000" style="color: #4fd1c5;">http://localhost:8000</a>
-            </div>`;
-    });
-
     const searchInput = document.getElementById('enemyInput');
     const resultsDiv = document.getElementById('results');
     const statsDiv = document.getElementById('stats');
     const clearBtn = document.getElementById('clearBtn');
     const suggestionsDiv = document.getElementById('suggestions');
+    const pageSubtitle = document.getElementById('pageSubtitle');
+
+    function loadGameData(version) {
+        resultsDiv.innerHTML = `<p class="no-results">⏳ Loading Star Force ${version.slice(-1)} data...</p>`;
+        pageSubtitle.textContent = `MEGA MAN STAR FORCE ${version.slice(-1)} - Find All Enemy Locations`;
+        
+        // Reset data containers
+        enemyData = {};
+        cardData = {};
+        allEnemies = [];
+
+        // Load versioned JSON files
+        Promise.all([
+            fetch(`enemy_locations_${version}.json`).then(r => r.json()),
+            fetch(`card_locations_${version}.json`).then(r => r.json())
+        ])
+        .then(([enemies, cards]) => {
+            // Filter out non-enemy entries
+            const filtered = {};
+            const metaKeywords = ['HP', '%', 'Chance', 'Harp Note', 'appear', 'order'];
+            
+            Object.keys(enemies).forEach(key => {
+                const isMeta = metaKeywords.some(keyword => key.includes(keyword));
+                const isNumericOnly = /^[\d.%\s]+$/.test(key);
+                
+                if (!isMeta && !isNumericOnly) {
+                    filtered[key] = enemies[key];
+                }
+            });
+            
+            // Normalize data
+            const merged = {};
+            Object.keys(filtered).forEach(key => {
+                const lowerKey = key.toLowerCase();
+                const existingKey = Object.keys(merged).find(k => k.toLowerCase() === lowerKey);
+                
+                if (existingKey) {
+                    merged[existingKey] = [...new Set([...merged[existingKey], ...filtered[key]])].sort();
+                } else {
+                    merged[key] = filtered[key].sort();
+                }
+            });
+            
+            enemyData = merged;
+            cardData = cards;
+            allEnemies = Object.keys(enemyData).sort();
+            
+            // Re-trigger search if there's already text in the box, or clear view
+            const currentVal = searchInput.value.trim().toLowerCase();
+            if (currentVal) {
+                performSearch(currentVal);
+            } else {
+                resultsDiv.innerHTML = '<p class="no-results">🔎 Type an enemy name to search...</p>';
+                statsDiv.style.display = 'none';
+            }
+        })
+        .catch(err => {
+            console.error('Failed to load data:', err);
+            resultsDiv.innerHTML = `
+                <div class="error-message">
+                    <strong>⚠️ Error - Cannot load Star Force ${version.slice(-1)} data</strong>
+                    Make sure <code>enemy_locations_${version}.json</code> and <code>card_locations_${version}.json</code> exist.<br><br>
+                    <strong>Note:</strong> Browsers block local file access via file://. Run <code>python -m http.server</code>
+                </div>`;
+        });
+    }
+
+    // Handle game switch
+    const gameTabs = document.getElementById('gameTabs');
+    const tabButtons = gameTabs.querySelectorAll('.tab-btn');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadGameData(btn.getAttribute('data-version'));
+        });
+    });
+
+    // Initial load
+    loadGameData('SF1');
 
     // Get cards dropped by an enemy
     function getCardsForEnemy(enemyName) {

@@ -1,0 +1,374 @@
+{
+  "MadVulcn1": [
+    "BaseMortar"
+  ],
+  "MadVulcn2": [
+    "BaseGunner"
+  ],
+  "MadVulcn3": [
+    "BaseSniper"
+  ],
+  "HeatGrnde": [
+    "Help Quest"
+  ],
+  "Bushido1": [
+    "Musashi"
+  ],
+  "Bushido2": [
+    "Kotetsu"
+  ],
+  "Bushido3": [
+    "Masamune"
+  ],
+  "GrandWave1": [
+    "Mettenna"
+  ],
+  "GrandWave2": [
+    "Mettenna2"
+  ],
+  "GrandWave3": [
+    "Mettenna3"
+  ],
+  "JetAttack1": [
+    "Crowcar"
+  ],
+  "JetAttack3": [
+    "Crowbus"
+  ],
+  "Buki1": [
+    "Raid"
+  ],
+  "Buki2": [
+    "Ravage"
+  ],
+  "Buki3": [
+    "Ransack"
+  ],
+  "SmileCoin1": [
+    "Smiles"
+  ],
+  "SmileCoin2": [
+    "Smiling"
+  ],
+  "SmileCoin3": [
+    "Smiley"
+  ],
+  "BigDrop1": [
+    "Ku'i"
+  ],
+  "BigDrop2": [
+    "Ku'i-ga"
+  ],
+  "BuzzSaw1": [
+    "Chakram"
+  ],
+  "BuzzSaw2": [
+    "BlueChakram"
+  ],
+  "BuzzSaw3": [
+    "OnyxChakram"
+  ],
+  "SkullArrw1": [
+    "BoneArcher"
+  ],
+  "SkullArrw2": [
+    "SkeleArcher"
+  ],
+  "SkullArrw3": [
+    "GhoulArcher"
+  ],
+  "MuTech1": [
+    "MuDefender"
+  ],
+  "MuTech2": [
+    "MuProtector"
+  ],
+  "TimeBomb1": [
+    "DoomCount"
+  ],
+  "TimeBomb2": [
+    "DoomBomber"
+  ],
+  "TimeBomb3": [
+    "DoomPlosion"
+  ],
+  "HeatUppr1": [
+    "Boom"
+  ],
+  "HeatUppr2": [
+    "Bang"
+  ],
+  "HeatUppr3": [
+    "Ka-Boom"
+  ],
+  "MechFlame1": [
+    "Scorcher"
+  ],
+  "MechFlame2": [
+    "DlxScorcher"
+  ],
+  "MadFire1": [
+    "Koma"
+  ],
+  "MadFire2": [
+    "Shishi"
+  ],
+  "WideWave1": [
+    "Wibbledee"
+  ],
+  "WideWave2": [
+    "Wibbledoo"
+  ],
+  "WideWave3": [
+    "Wibbledum"
+  ],
+  "BubblHook1": [
+    "StremCancro"
+  ],
+  "BubblHook2": [
+    "RiverCancro"
+  ],
+  "SharkAtk1": [
+    "BlueShark"
+  ],
+  "SharkAtk2": [
+    "SandShark"
+  ],
+  "SharkAtk3": [
+    "GoblinShark"
+  ],
+  "IceSpin1": [
+    "Spinguin"
+  ],
+  "IceSpin2": [
+    "MidSpinguin"
+  ],
+  "StlthLzr1": [
+    "Stealth"
+  ],
+  "StlthLzr2": [
+    "MegaStealth"
+  ],
+  "StlthLzr3": [
+    "GigaStealth"
+  ],
+  "MummyHand1": [
+    "ShockMummy"
+  ],
+  "MummyHand2": [
+    "ShockTut"
+  ],
+  "MummyHand3": [
+    "ShockMummy"
+  ],
+  "ThndrHead1": [
+    "Voltragon"
+  ],
+  "ThndrHead2": [
+    "Wattragon"
+  ],
+  "FlashStrk1": [
+    "Zapper"
+  ],
+  "FlashStrk2": [
+    "Zapper"
+  ],
+  "ArachAtk1": [
+    "Arachnid"
+  ],
+  "ArachAtk2": [
+    "Arachnod"
+  ],
+  "ArachAtk3": [
+    "Arachnoid"
+  ],
+  "Shuriken1": [
+    "ShuriKen"
+  ],
+  "Shuriken2": [
+    "ShuriKen-2"
+  ],
+  "PollnShot1": [
+    "GrassPollen"
+  ],
+  "PollnShot2": [
+    "WeedPollen"
+  ],
+  "PollnShot3": [
+    "TreePollen"
+  ],
+  "AcornBomb1": [
+    "Nutty"
+  ],
+  "AcornBomb2": [
+    "Nutsy"
+  ],
+  "NoiseWzrd1": [
+    "NoiseWzrdB1",
+    "NoiseWzrdR1"
+  ],
+  "NoiseWzrd2": [
+    "NoiseWzrdB2",
+    "NoiseWzrdR2"
+  ],
+  "NoiseWzrd3": [
+    "NoiseWzrdS1",
+    "NoiseWzrdS2"
+  ],
+  "MalWizard1": [
+    "MalWizard"
+  ],
+  "MalWizard2": [
+    "MalWizard2",
+    "MalWizard3"
+  ],
+  "MalWizard3": [
+    "MalWizard3"
+  ],
+  "BlackHole1": [
+    "Grabity"
+  ],
+  "BlackHole2": [
+    "Grabotron"
+  ],
+  "BlackHole3": [
+    "Grabaklone"
+  ],
+  "AtkPanel": [
+    "Help Quest"
+  ],
+  "SpadMgnes": [
+    "SpadMgnesV3V3"
+  ],
+  "SpadMgnesV2V2": [
+    "SpadMgnesV3V3"
+  ],
+  "SpadMgnesV3V3": [
+    "SpadMgnes\u03a9"
+  ],
+  "DiamndIce": [
+    "DiamndIceV3V3"
+  ],
+  "DiamndIceV2V2": [
+    "DiamndIceV3V3"
+  ],
+  "DiamndIceV3V3": [
+    "DiamndIce\u03a9"
+  ],
+  "ClubStrng": [
+    "ClubStrngV3V3"
+  ],
+  "ClubStrngV2V2": [
+    "ClubStrngV3V3"
+  ],
+  "ClubStrngV3V3": [
+    "ClubStrng\u03a9"
+  ],
+  "QueenVrgo": [
+    "QueenVrgoV3V3"
+  ],
+  "QueenVrgoV2V2": [
+    "QueenVrgoV3V3"
+  ],
+  "QueenVrgoV3V3": [
+    "QueenVrgo\u03a9"
+  ],
+  "JackCorvs": [
+    "JackCorvsV3V3"
+  ],
+  "JackCorvsV2V2": [
+    "JackCorvsV3V3"
+  ],
+  "JackCorvsV3V3": [
+    "JackCorvs\u03a9"
+  ],
+  "DreadJokr": [
+    "DreadJokrV3V3"
+  ],
+  "DreadJokrV2V2": [
+    "DreadJokrV3V3"
+  ],
+  "AcidAce": [
+    "AcidAceV3V3"
+  ],
+  "AcidAceV2V2": [
+    "AcidAceV3V3"
+  ],
+  "TaursFire": [
+    "TaursFireV3V3"
+  ],
+  "TaursFireV2V2": [
+    "TaursFireV3V3"
+  ],
+  "TaursFireV3V3": [
+    "TaursFireV3V3",
+    "TaursFire\u03a9"
+  ],
+  "CygnsWing": [
+    "CygnsWingV3V3"
+  ],
+  "CygnsWingV2V2": [
+    "CygnsWingV3V3"
+  ],
+  "CygnsWingV3V3": [
+    "CygnsWing\u03a9"
+  ],
+  "WolfWoods": [
+    "WolfWoodsV3V3"
+  ],
+  "WolfWoodsV2V2": [
+    "WolfWoodsV3V3"
+  ],
+  "WolfWoodsV3V3": [
+    "WolfWoods\u03a9"
+  ],
+  "DrkPhntm": [
+    "DrkPhntmV3V3"
+  ],
+  "DrkPhntmV2V2": [
+    "DrkPhntmV3V3"
+  ],
+  "DrkPhntmV3V3": [
+    "DrkPhntm\u03a9"
+  ],
+  "Rogue": [
+    "RogueV3V3"
+  ],
+  "RogueV2V2": [
+    "RogueV3V3"
+  ],
+  "MoonDstry": [
+    "MoonDstryV3V3"
+  ],
+  "MoonDstryV2V2": [
+    "MoonDstryV3V3"
+  ],
+  "MoonDstryV3V3": [
+    "MoonDstry\u03a3"
+  ],
+  "ApolloFlm": [
+    "ApolloFlmV3V3"
+  ],
+  "ApolloFlmV2V2": [
+    "ApolloFlmV3V3"
+  ],
+  "ApolloFlmV3V3": [
+    "ApolloFlmV3V3",
+    "ApolloFlm\u03a3"
+  ],
+  "Sirius": [
+    "SiriusV3V3"
+  ],
+  "SiriusV2V2": [
+    "SiriusV3V3"
+  ],
+  "SiriusV3V3": [
+    "Sirius\u03a3"
+  ],
+  "BrkTmeBmb": [
+    "Help Quest"
+  ],
+  "OxTackle": [
+    "Help Quest"
+  ]
+}

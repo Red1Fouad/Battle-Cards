@@ -1,0 +1,341 @@
+{
+  "PlsmaGun3": [
+    "Help Quest"
+  ],
+  "RdrMisil3": [
+    "Help Quest"
+  ],
+  "SilvMteor": [
+    "Help Quest"
+  ],
+  "GrndWave1": [
+    "MettennaG"
+  ],
+  "GrndWave2": [
+    "Mettenna2"
+  ],
+  "GrndWave3": [
+    "Mettenna3"
+  ],
+  "MadVulcn1": [
+    "BaseGunner"
+  ],
+  "MadVulcn2": [
+    "BaseGunner"
+  ],
+  "Scythe1": [
+    "DarkReaper"
+  ],
+  "Scythe2": [
+    "DarkJoker"
+  ],
+  "BooHat1": [
+    "BoodachG"
+  ],
+  "BooHat2": [
+    "BooSpook"
+  ],
+  "BooHat3": [
+    "BooGeist"
+  ],
+  "JetSki1": [
+    "HareJetG"
+  ],
+  "JetSki2": [
+    "HareRocket"
+  ],
+  "FireRing1": [
+    "HotRoaderG"
+  ],
+  "FireRing2": [
+    "HotMotor"
+  ],
+  "DnceFire1": [
+    "BubbaDanceG"
+  ],
+  "DnceFire2": [
+    "HoppaDance"
+  ],
+  "HeatUppr1": [
+    "BoomG"
+  ],
+  "HeatUppr2": [
+    "Bang"
+  ],
+  "HeatUppr3": [
+    "Ka-Boom"
+  ],
+  "KiloBomb1": [
+    "Bom"
+  ],
+  "KiloBomb2": [
+    "BomBom"
+  ],
+  "KiloBomb3": [
+    "BomBomBom"
+  ],
+  "ChainBbl1": [
+    "StreamCncroG"
+  ],
+  "ChainBbl3": [
+    "SeaCancro"
+  ],
+  "StkyRain1": [
+    "Gooey"
+  ],
+  "StkyRain3": [
+    "Gloppy"
+  ],
+  "SnoBall1": [
+    "SnoRoll"
+  ],
+  "PiranKss1": [
+    "PiranG"
+  ],
+  "PiranKss3": [
+    "Piranest"
+  ],
+  "VoltcEye1": [
+    "EyezG"
+  ],
+  "VoltcEye2": [
+    "GuardEyez"
+  ],
+  "VoltcEye3": [
+    "ProtectEyez"
+  ],
+  "FlckrKck2": [
+    "Lucis"
+  ],
+  "FlckrKck3": [
+    "Lumis"
+  ],
+  "StlthLzr1": [
+    "Stealth"
+  ],
+  "StlthLzr2": [
+    "MegaStealth"
+  ],
+  "MumyHand1": [
+    "ShockMummyG"
+  ],
+  "MumyHand2": [
+    "ShockTut"
+  ],
+  "MopLance1": [
+    "PrivateMopG"
+  ],
+  "MopLance2": [
+    "ColonelMop"
+  ],
+  "MopLance3": [
+    "GeneralMop"
+  ],
+  "Fokx-Fu1": [
+    "FokxG"
+  ],
+  "Fokx-Fu2": [
+    "CopyFokx"
+  ],
+  "Fokx-Fu3": [
+    "GuiseFokx"
+  ],
+  "Squall1": [
+    "Storm"
+  ],
+  "Squall2": [
+    "Cyclone"
+  ],
+  "NeedlAtk1": [
+    "FlitG"
+  ],
+  "NeedlAtk2": [
+    "Flitter"
+  ],
+  "GrnCarpet": [
+    "MatJinnG"
+  ],
+  "BlueCarpt": [
+    "RugJinn"
+  ],
+  "PrplCarpt": [
+    "CarpetJinn"
+  ],
+  "PuffBlst1": [
+    "Puff"
+  ],
+  "PuffBlst2": [
+    "Fluff"
+  ],
+  "Buki1": [
+    "RaidG"
+  ],
+  "Buki2": [
+    "Ravage"
+  ],
+  "Buki3": [
+    "Ransack"
+  ],
+  "JngleStrm": [
+    "AirSquiggle"
+  ],
+  "SnoStorm": [
+    "AirSquirm"
+  ],
+  "PoisnStrm": [
+    "AirWobble"
+  ],
+  "ElecSlash": [
+    "MonoSwordG"
+  ],
+  "WoodSlash": [
+    "MonoSwordin"
+  ],
+  "FireSlash": [
+    "MonoSwordil"
+  ],
+  "MoaiFall1": [
+    "MoaianG"
+  ],
+  "MoaiFall2": [
+    "Stonehead"
+  ],
+  "MoaiFall3": [
+    "GiantFace"
+  ],
+  "BlackHole1": [
+    "Grabity"
+  ],
+  "BlackHole2": [
+    "Grabotron"
+  ],
+  "BlackHole3": [
+    "Grabaklone"
+  ],
+  "BsrkSwrd1": [
+    "McCleaver"
+  ],
+  "BsrkSwrd2": [
+    "McDicer"
+  ],
+  "BsrkSwrd3": [
+    "McLopper"
+  ],
+  "Recover300": [
+    "Help Quest"
+  ],
+  "AttckPanel": [
+    "Help Quest"
+  ],
+  "Whistle": [
+    "Help Quest"
+  ],
+  "HolyPanel": [
+    "Help Quest"
+  ],
+  "DrkPhntm": [
+    "DrkPhntmSPSP"
+  ],
+  "DrkPhntmEXEX": [
+    "DrkPhntmSPSP"
+  ],
+  "YetiBlzzrd": [
+    "YtiBlzrdSPSP"
+  ],
+  "YtBlzzrdEXEX": [
+    "YtiBlzrdSPSP"
+  ],
+  "Rogue": [
+    "RogueSPSP"
+  ],
+  "RogueEXEX": [
+    "RogueSPSP"
+  ],
+  "PlesioSrf": [
+    "PlsioSrfSPSP"
+  ],
+  "PlsioSrfEXEX": [
+    "PlsioSrfSPSP"
+  ],
+  "TerraCndr": [
+    "TrraCndrSPSP"
+  ],
+  "TrraCndrEXEX": [
+    "TrraCndrSPSP"
+  ],
+  "Hollow": [
+    "HollowSPSP"
+  ],
+  "HollowEXEX": [
+    "HollowSPSP"
+  ],
+  "TaurusFire": [
+    "TaurusFireSPSP"
+  ],
+  "TaursFireEXEX": [
+    "TaurusFireSPSP"
+  ],
+  "HarpNote": [
+    "HarpNoteSPSP"
+  ],
+  "HarpNoteEXEX": [
+    "HarpNoteSPSP"
+  ],
+  "QnOphiuca": [
+    "QnOphiucaSPSP"
+  ],
+  "QnOphiucaEXEX": [
+    "QnOphiucaSPSP"
+  ],
+  "MadVulcn3": [
+    "BaseSniper"
+  ],
+  "Scythe3": [
+    "DarkDemon"
+  ],
+  "JetSki3": [
+    "HareNitro"
+  ],
+  "FireRing3": [
+    "HotBiker"
+  ],
+  "DnceFire3": [
+    "JakaDance"
+  ],
+  "ChainBbl2": [
+    "RiverCancro"
+  ],
+  "StkyRain2": [
+    "Goopy"
+  ],
+  "SnoBall2": [
+    "SnoRoller"
+  ],
+  "SnoBall3": [
+    "SnoRollest"
+  ],
+  "PiranKss2": [
+    "Piraner"
+  ],
+  "FlckrKck1": [
+    "Lampis"
+  ],
+  "StlthLzr3": [
+    "GigaStealth"
+  ],
+  "MumyHand3": [
+    "ShockSeti"
+  ],
+  "Squall3": [
+    "Tempest"
+  ],
+  "NeedlAtk3": [
+    "Flitterize"
+  ],
+  "PuffBlst3": [
+    "Muff"
+  ],
+  "AtomMine3": [
+    "Help Quest"
+  ]
+}
